@@ -1,9 +1,36 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate preset for every justanotherspy repository. Extend it with `local>justanotherspy/renovate`.",
   "extends": [
     "config:best-practices",
-    ":semanticCommits"
+    ":semanticCommits",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "security:minimumReleaseAgeCrate",
+    "security:minimumReleaseAgePypi",
+    "security:gomodIndirectSecurityUpdates",
+    "customManagers:githubActionsVersions",
+    "customManagers:makefileVersions",
+    "customManagers:dockerfileVersions"
   ],
+  "labels": [
+    "dependencies"
+  ],
+  "osvVulnerabilityAlerts": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "unresolved",
+  "vulnerabilityAlerts": {
+    "addLabels": [
+      "security"
+    ]
+  },
+  "postUpdateOptions": [
+    "gomodTidy",
+    "gomodUpdateImportPaths"
+  ],
+  "pip-compile": {
+    "managerFilePatterns": [
+      "/(^|/)\\.github/requirements/[^/]+\\.txt$/"
+    ]
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
@@ -29,6 +56,16 @@
         "pin"
       ],
       "automerge": true
+    },
+    {
+      "description": "Major updates get their own PR, are never automerged, and are labelled so breaking changes get a human look",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "addLabels": [
+        "major"
+      ]
     }
   ]
 }
