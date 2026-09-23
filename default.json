@@ -58,13 +58,13 @@
       "automerge": true
     },
     {
-      "description": "Major updates get their own PR, are never automerged, and are labelled so breaking changes get a human look",
+      "description": "Major updates get their own PR, are never automerged, and are labelled `major-update` so breaking changes get a human look. Not `major`: release-drafter in garlic, shuck and sproot resolves a `major` label to a major version bump of the repo itself",
       "matchUpdateTypes": [
         "major"
       ],
       "automerge": false,
       "addLabels": [
-        "major"
+        "major-update"
       ]
     }
   ]

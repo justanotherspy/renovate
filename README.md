@@ -26,7 +26,7 @@ that repository's own `renovate.json`, next to the file they describe.
 | `security:minimumReleaseAgeCrate`, `security:minimumReleaseAgePypi` | The same 3-day release-age cooldown for crates and PyPI that `config:best-practices` applies to npm. |
 | `security:gomodIndirectSecurityUpdates` | Indirect Go modules are updated only when they carry a vulnerability. |
 | `customManagers:githubActionsVersions`, `customManagers:makefileVersions`, `customManagers:dockerfileVersions` | Any `*_VERSION` variable in a workflow, Makefile or Dockerfile is kept current once it carries a `# renovate: datasource=… depName=…` comment on the line above. |
-| `labels: ["dependencies"]`, `major` label on major updates | Filtering. Vulnerability fixes also get `security`. |
+| `labels: ["dependencies"]`, `major-update` label on major updates | Filtering. Vulnerability fixes also get `security`. The label is deliberately not `major`: release-drafter in garlic, shuck and sproot resolves `major` to a major version bump of the repo itself, so a dependency major would otherwise cut a major release. |
 | `osvVulnerabilityAlerts`, `dependencyDashboardOSVVulnerabilitySummary: "unresolved"` | Vulnerability PRs from osv.dev in addition to GitHub's advisories, and a list of unresolved CVEs on the dashboard. |
 | `postUpdateOptions: gomodTidy, gomodUpdateImportPaths` | Go updates run `go mod tidy`, and a major bump (`/v89` → `/v92`) rewrites the import paths, so the PR builds and passes a tidy check. |
 | `pip-compile` on `.github/requirements/*.txt` | The hash-pinned CI tool requirements (semgrep, zizmor) are recompiled from their `.in` files. See below. |
