@@ -46,6 +46,17 @@ uv pip compile --universal --generate-hashes --python-version=3.13 \
   .github/requirements/zizmor.in --output-file=.github/requirements/zizmor.txt
 ```
 
+### semgrep's pinned transitive dependencies
+
+semgrep pins exact versions of `mcp` and `opentelemetry-api`. When either one
+gets an advisory, Renovate raises a `[security]` PR for it, and the only way
+`uv` can satisfy that from a `semgrep.in` that just says `semgrep` is to
+downgrade semgrep by a hundred releases. The weekly pip-compile refresh then
+moves semgrep back up and the security PR returns. A package rule disables
+updates for those two names when they are indirect dependencies of a
+`pip-compile` file, so they change only when a semgrep release changes them.
+Remove a name from the rule once semgrep stops pinning it.
+
 ## Validating a change
 
 CI runs `renovate-config-validator --strict` on every pull request. Locally
