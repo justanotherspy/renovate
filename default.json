@@ -66,6 +66,20 @@
       "addLabels": [
         "major-update"
       ]
+    },
+    {
+      "description": "semgrep pins exact versions of mcp and opentelemetry-api, so a pip-compile file that only asks for semgrep can take a vulnerability fix for either one only by downgrading semgrep (1.185 to 1.79). Leave these two transitive pins alone: they move when a semgrep release moves them, through the normal pip-compile refresh. Remove a name once semgrep no longer pins it",
+      "matchManagers": [
+        "pip-compile"
+      ],
+      "matchDepTypes": [
+        "indirect"
+      ],
+      "matchPackageNames": [
+        "mcp",
+        "opentelemetry-api"
+      ],
+      "enabled": false
     }
   ]
 }
